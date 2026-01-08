@@ -5,6 +5,22 @@ import pandas as pd
 
 app = Flask(__name__)
 
+def init_db():
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
+    c.execute("""
+    CREATE TABLE IF NOT EXISTS registrations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        phone TEXT,
+        email TEXT
+    )
+    """)
+    conn.commit()
+    conn.close()
+
+init_db()
+
 @app.route("/", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -38,5 +54,6 @@ def export_excel():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT",10000))
     app.run(host="0.0.0.0",port=port)
+
 
 
