@@ -1036,10 +1036,10 @@ const CONFIG = {
   // Admin access code — change this before sharing the page.
   adminCode: "Worship@2026##",
 
-  // Supabase project
+  // Supabase project (anon key only — service key stays server-side)
   supabaseUrl: "https://kauodthouehzwjljzfdq.supabase.co",
   supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthdW9kdGhvdWVoendqbGp6ZmRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4Nzk5OTQsImV4cCI6MjA5NjQ1NTk5NH0.2B21bKHgqsbiIBRBGS34YaJeDua34Xi8o1NeqIixIms",
-  supabaseServiceKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthdW9kdGhvdWVoendqbGp6ZmRxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDg3OTk5NCwiZXhwIjoyMDk2NDU1OTk0fQ.gGJwTFRtAe6_ztD4wsOln0NkZhlfPuMWySYOKhv9bFM",
+  adminApi: "/api/admin",
 
   // WhatsApp channel link shown after success.
   whatsappUrl: "https://whatsapp.com/channel/0029Vb6wQhtCcW4xdlekeS3S",
@@ -1055,13 +1055,16 @@ function escapeHtml(s){
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 }
 
+// Admin password — set after successful gate unlock
+let adminPassword = "";
+
 async function supabaseFetch(path, options = {}) {
   const url = CONFIG.supabaseUrl + path;
   const res = await fetch(url, {
     ...options,
     headers: {
-      "apikey": options.serviceKey ? CONFIG.supabaseServiceKey : CONFIG.supabaseAnonKey,
-      "Authorization": `Bearer ${options.serviceKey ? CONFIG.supabaseServiceKey : CONFIG.supabaseAnonKey}`,
+      "apikey": CONFIG.supabaseAnonKey,
+      "Authorization": `Bearer ${CONFIG.supabaseAnonKey}`,
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Prefer": options.prefer || "",
@@ -1075,28 +1078,33 @@ async function supabaseFetch(path, options = {}) {
   return options.raw ? res : res.json();
 }
 
+async function adminApi(action, id) {
+  const res = await fetch(CONFIG.adminApi, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password: adminPassword, action, id })
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.error || `API ${res.status}`);
+  }
+  return res.json();
+}
+
 async function loadAll() {
   try {
-    return await supabaseFetch("/rest/v1/registrations?select=*&order=created_at.desc", { serviceKey: true });
+    return await adminApi("list");
   } catch {
     return [];
   }
 }
 
 async function deleteEntry(id) {
-  await supabaseFetch(`/rest/v1/registrations?id=eq.${id}`, {
-    method: "DELETE",
-    serviceKey: true,
-    raw: true
-  });
+  await adminApi("delete", id);
 }
 
 async function clearAll() {
-  // Fetch all IDs then delete them
-  const all = await loadAll();
-  for (const r of all) {
-    await deleteEntry(r.id);
-  }
+  await adminApi("clear");
 }
 
 /* =================================================================
@@ -1204,6 +1212,8 @@ function closeAdmin() {
   if (location.hash === "#admin") history.replaceState(null, "", location.pathname + location.search);
 }
 function unlockAdmin() {
+  // Store password from gate input for API calls
+  adminPassword = $("#gate-input").value.trim();
   gateEl.style.display = "none";
   sheetEl.style.display = "block";
   sessionStorage.setItem("lrw.admin", "1");
