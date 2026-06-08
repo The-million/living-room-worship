@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Living-Room Worship · Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* =========================================================
+     Living-Room Worship · registration
+     Simple, flat colours — pulled from the poster palette
+     ========================================================= */
+  :root {
+    --paper:        #f3ead4;   /* cream, primary background */
+    --paper-soft:   #f8f0d8;
+    --ink:          #1f1608;   /* deep brown, primary text */
+    --ink-soft:     #4a3618;
+    --ink-mute:     #8a7548;
+    --gold:         #c89421;   /* solid gold accent */
+    --gold-deep:    #a87923;
+    --line:         rgba(31, 22, 8, 0.18);
+    --line-soft:    rgba(31, 22, 8, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Stage (MOBILE-FIRST: single column by default) ---------- */
+  .stage {
+    min-height: 100vh;
+    display: block;
+    background: var(--paper);
+  }
+
+  /* ============ Poster panel — mobile defaults ============ */
+  .poster {
+    position: relative;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 32px 20px 36px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  /* simple corner marks — only on tablet+ */
+  .corner { display: none; }
+
+  /* Tablet+ */
+  @media (min-width: 720px) {
+    .poster { padding: 48px 36px 52px; }
+    .corner {
+      display: block;
+      position: absolute;
+      width: 28px; height: 28px;
+      border: 1px solid var(--line);
+      pointer-events: none;
+    }
+    .corner.tl { top: 22px; left: 22px; border-right: none; border-bottom: none; }
+    .corner.tr { top: 22px; right: 22px; border-left: none; border-bottom: none; }
+    .corner.bl { bottom: 22px; left: 22px; border-right: none; border-top: none; }
+    .corner.br { bottom: 22px; right: 22px; border-left: none; border-top: none; }
+  }
+
+  /* Desktop — side-by-side */
+  @media (min-width: 980px) {
+    .stage {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      min-height: 100vh;
+    }
+    .poster {
+      padding: 56px 64px;
+      min-height: 100vh;
+      justify-content: space-between;
+      border-bottom: none;
+      border-right: 1px solid var(--line-soft);
+    }
+  }
+
+  /* presenter line — mobile */
+  .presenter {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    color: var(--ink-soft);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .presenter .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .presenter .divider {
+    width: 1px;
+    height: 16px;
+    background: var(--line);
+    align-self: center;
+  }
+  .presenter small {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+  @media (min-width: 720px) {
+    .presenter { font-size: 13px; gap: 14px; }
+    .presenter .brand { font-size: 22px; }
+    .presenter .divider { height: 18px; }
+    .presenter small { font-size: 11px; letter-spacing: 0.32em; }
+  }
+
+  /* wordmark — mobile first */
+  .wordmark {
+    margin: 28px 0 22px;
+  }
+  .wordmark .l1 {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 28px;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+  }
+  .wordmark .l2 {
+    display: block;
+    font-family: 'Anton', 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: clamp(56px, 17vw, 92px);
+    line-height: 0.92;
+    color: var(--gold-deep);
+    letter-spacing: 0.005em;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  @media (min-width: 720px) {
+    .wordmark { margin: 44px 0 26px; }
+    .wordmark .l1 { font-size: clamp(36px, 4.4vw, 60px); margin-bottom: 6px; }
+    .wordmark .l2 { font-size: clamp(96px, 11vw, 168px); }
+  }
+
+  /* verse — mobile */
+  .verse {
+    margin: 4px 0 28px;
+    padding-left: 12px;
+    border-left: 2px solid var(--gold);
+  }
+  .verse .q {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .verse .ref {
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+  @media (min-width: 720px) {
+    .verse { padding-left: 14px; margin: 8px 0 40px; }
+    .verse .q { font-size: clamp(20px, 1.9vw, 24px); }
+    .verse .ref { font-size: 11px; }
+  }
+
+  /* pillars — mobile: tighter grid */
+  .pillars {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+  }
+  .pillars li {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    position: relative;
+    padding-left: 16px;
+  }
+  .pillars li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    width: 8px; height: 1px;
+    background: var(--gold);
+    transform: translateY(-50%);
+  }
+  @media (min-width: 720px) {
+    .pillars { gap: 14px 56px; margin-bottom: 32px; grid-template-columns: repeat(2, max-content); }
+    .pillars li { font-size: 14px; letter-spacing: 0.22em; padding-left: 18px; }
+  }
+
+  /* meta — mobile: stacked */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--paper-soft);
+  }
+  .meta-grid .cell {
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .meta-grid .cell + .cell {
+    border-top: 1px solid var(--line);
+  }
+  .meta-grid .icon {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    color: var(--gold-deep);
+    margin-top: 2px;
+  }
+  .meta-grid .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .meta-grid .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  @media (min-width: 560px) {
+    .meta-grid { grid-template-columns: 1fr 1fr; }
+    .meta-grid .cell + .cell { border-top: none; border-left: 1px solid var(--line); }
+    .meta-grid .cell { padding: 20px 22px; }
+    .meta-grid .value { font-size: 19px; }
+  }
+
+  /* ============ Form panel — mobile first ============ */
+  .form-side {
+    padding: 36px 20px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    background: var(--paper-soft);
+  }
+  @media (min-width: 720px) {
+    .form-side { padding: 56px 36px 64px; }
+  }
+  @media (min-width: 980px) {
+    .form-side { padding: 72px 64px; justify-content: center; }
+  }
+
+  .form-card {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--gold-deep);
+  }
+  @media (min-width: 720px) {
+    .eyebrow { font-size: 11px; letter-spacing: 0.4em; margin-bottom: 18px; }
+    .eyebrow::before { width: 28px; }
+  }
+
+  h1.form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.1;
+    margin: 0 0 12px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  h1.form-title em {
+    font-style: italic;
+    color: var(--gold-deep);
+  }
+  @media (min-width: 720px) {
+    h1.form-title { font-size: clamp(32px, 3.6vw, 44px); margin-bottom: 14px; }
+  }
+
+  .form-lede {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 0 28px;
+    max-width: 42ch;
+  }
+  @media (min-width: 720px) {
+    .form-lede { font-size: 16px; margin-bottom: 40px; }
+  }
+
+  /* form fields — mobile first (16px input prevents iOS zoom) */
+  .field {
+    display: block;
+    margin-bottom: 22px;
+  }
+  .field label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .field input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    background: transparent;
+    font: inherit;
+    font-size: 17px;
+    color: var(--ink);
+    padding: 10px 2px 12px;
+    outline: none;
+    transition: border-color 0.18s ease;
+    border-radius: 0;
+  }
+  .field input::placeholder {
+    color: rgba(74, 54, 24, 0.4);
+  }
+  .field input:focus {
+    border-color: var(--gold-deep);
+  }
+  .field.invalid input { border-color: #b54a2e; }
+  .field-error {
+    font-size: 12px;
+    color: #b54a2e;
+    margin-top: 6px;
+    display: none;
+  }
+  .field.invalid .field-error { display: block; }
+
+  /* contact toggle — mobile: full-width segmented control */
+  .contact-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    margin-bottom: 18px;
+    width: 100%;
+    padding: 4px;
+  }
+  .contact-tabs button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    padding: 12px 18px;
+    border-radius: 999px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .contact-tabs button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  @media (min-width: 720px) {
+    .contact-tabs { width: fit-content; padding: 3px; }
+    .contact-tabs button { flex: none; font-size: 11px; padding: 8px 18px; }
+  }
+
+  /* submit */
+  .submit {
+    margin-top: 16px;
+    width: 100%;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    padding: 18px 22px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.18s ease, transform 0.18s ease;
+  }
+  .submit:hover { background: #0e0904; transform: translateY(-1px); }
+  .submit:disabled { opacity: 0.55; cursor: progress; transform: none; }
+
+  .legal {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--ink-mute);
+    line-height: 1.5;
+  }
+
+  .form-foot {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+
+  /* ================== SUCCESS SCREEN ================== */
+  .success {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    background: var(--ink);
+    color: var(--paper);
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    overflow-y: auto;
+  }
+  .success.on { display: flex; animation: fadein 0.4s ease both; }
+  @keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .success-card {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    padding: 32px 20px;
+  }
+  .success-mark {
+    width: 84px; height: 84px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    animation: pop 0.5s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes pop {
+    from { transform: scale(0.4); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .success-mark svg { width: 38px; height: 38px; color: var(--ink); }
+
+  .success h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(32px, 4.4vw, 44px);
+    margin: 0 0 8px;
+    color: var(--paper);
+    line-height: 1.1;
+  }
+  .success h2 em { font-style: italic; color: var(--gold); }
+
+  .success .verse-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 17px;
+    margin: 12px 0 24px;
+  }
+  .success .lede {
+    color: rgba(243, 234, 212, 0.78);
+    line-height: 1.55;
+    font-size: 15px;
+    margin-bottom: 36px;
+  }
+
+  .wa-card {
+    margin: 0 auto 22px;
+    background: rgba(243, 234, 212, 0.06);
+    border: 1px solid rgba(243, 234, 212, 0.18);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .wa-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .wa-icon svg { width: 26px; height: 26px; color: #fff; }
+  .wa-info { flex: 1; min-width: 0; }
+  .wa-info .t {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .wa-info .s {
+    color: var(--paper);
+    font-weight: 500;
+    margin-top: 4px;
+    font-size: 15px;
+  }
+
+  .btn-wa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 18px 24px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+  .btn-wa:hover { transform: translateY(-2px); background: #1FB958; }
+  .btn-wa svg { width: 20px; height: 20px; }
+
+  .btn-ghost {
+    margin-top: 18px;
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 11px;
+    color: rgba(243, 234, 212, 0.55);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .btn-ghost:hover { color: var(--gold); }
+
+  /* ================== ADMIN PANEL ================== */
+  .admin {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: none;
+    background: rgba(20, 14, 6, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 32px 24px;
+    overflow-y: auto;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .admin.on { display: flex; }
+
+  .admin-sheet {
+    width: 100%;
+    max-width: 980px;
+    background: var(--paper);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.4);
+    overflow: hidden;
+  }
+  .admin-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 28px;
+    background: var(--ink);
+    color: var(--gold);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .admin-head h3 {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--paper);
+  }
+  .admin-head h3 em { font-style: italic; color: var(--gold); }
+  .admin-tools {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .admin-tools button {
+    background: rgba(243, 234, 212, 0.08);
+    border: 1px solid rgba(243, 234, 212, 0.2);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    padding: 8px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: background 0.15s ease;
+  }
+  .admin-tools button:hover { background: rgba(243, 234, 212, 0.16); }
+  .admin-tools button.danger { color: #ffb097; border-color: rgba(255, 130, 100, 0.4); background: rgba(255, 130, 100, 0.08); }
+
+  .admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .admin-stats .stat {
+    background: var(--paper);
+    padding: 18px 22px;
+  }
+  .admin-stats .stat .n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .admin-stats .stat .l {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  .admin-search {
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .admin-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    font: inherit;
+    font-size: 15px;
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .reg-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .reg-table th, .reg-table td {
+    text-align: left;
+    padding: 12px 22px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .reg-table th {
+    background: rgba(168, 121, 35, 0.06);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .reg-table tbody tr:hover { background: rgba(200, 148, 33, 0.06); }
+  .reg-table .empty {
+    padding: 56px 24px;
+    text-align: center;
+    color: var(--ink-mute);
+    font-style: italic;
+  }
+  .row-action {
+    background: transparent;
+    border: none;
+    color: var(--ink-mute);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    line-height: 1;
+  }
+  .row-action:hover { color: #b54a2e; background: rgba(181, 74, 46, 0.08); }
+
+  .admin-foot {
+    padding: 18px 22px;
+    background: rgba(168, 121, 35, 0.06);
+    color: var(--ink-mute);
+    font-size: 12px;
+    line-height: 1.5;
+    border-top: 1px solid var(--line);
+  }
+  .admin-foot strong { color: var(--ink-soft); }
+  .admin-foot code {
+    font-family: ui-monospace, monospace;
+    font-size: 11px;
+    background: rgba(20, 12, 4, 0.06);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--ink-soft);
+  }
+
+  /* admin gate */
+  .gate {
+    width: 100%;
+    max-width: 380px;
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.4);
+    align-self: center;
+  }
+  .gate h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 26px;
+    margin: 0 0 4px;
+  }
+  .gate p {
+    color: var(--ink-mute);
+    font-size: 14px;
+    margin: 0 0 18px;
+  }
+  .gate input {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 15px;
+    margin-bottom: 12px;
+    outline: none;
+    background: var(--paper-soft);
+  }
+  .gate input:focus { border-color: var(--gold-deep); }
+  .gate button {
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .gate .hint {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--ink-mute);
+  }
+  .gate .err {
+    color: #b54a2e;
+    font-size: 12px;
+    margin: -4px 0 10px;
+    display: none;
+  }
+  .gate.bad .err { display: block; }
+  .gate .gate-cancel {
+    margin-top: 14px;
+    background: none;
+    border: none;
+    color: var(--ink-mute);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 6px;
+  }
+  .gate .gate-cancel:hover { color: var(--ink); }
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#f3ead4">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#f3ead4"/>
+    <g transform="translate(600 410)" text-anchor="middle">
+      <text y="-40" font-family="Georgia, serif" font-style="italic" font-size="76" fill="#1f1608">Living-Room</text>
+      <text y="140" font-family="Impact, sans-serif" font-size="240" font-weight="700" fill="#a87923" letter-spacing="6">WORSHIP</text>
+      <line x1="-120" y1="200" x2="120" y2="200" stroke="#a87923" stroke-width="3"/>
+      <text y="250" font-family="Inter, sans-serif" font-size="28" fill="#4a3618" letter-spacing="8">PSALM 145:4-6</text>
+    </g>
+  </svg>
+</template>
+</head>
+<body>
+
+<main class="stage" id="stage">
+  <!-- ============ LEFT: poster panel ============ -->
+  <section class="poster" data-screen-label="01 Poster">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+
+    <div class="poster-inner">
+      <div class="presenter">
+        <span class="brand">Upper&nbsp;Room</span>
+        <span class="divider"></span>
+        <small>Presents</small>
+      </div>
+
+      <div class="wordmark">
+        <span class="l1">Living-Room</span>
+        <span class="l2">Worship</span>
+      </div>
+
+      <div class="verse">
+        <div class="q">&ldquo;Behold the greatness of God.&rdquo;</div>
+        <div class="ref">Psalm 145:4-6</div>
+      </div>
+
+      <ul class="pillars">
+        <li>Worship</li>
+        <li>Testimonies</li>
+        <li>Prayer</li>
+        <li>Exhortation</li>
+      </ul>
+
+      <div class="meta-grid">
+        <div class="cell">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 3v4M16 3v4"/>
+          </svg>
+          <div>
+            <div class="label">Date</div>
+            <div class="value">July&nbsp;11,&nbsp;2026</div>
+          </div>
+        </div>
+        <div class="cell">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <div>
+            <div class="label">Location</div>
+            <div class="value">Hangzhou<br/>Gulou Church</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RIGHT: form panel ============ -->
+  <section class="form-side" data-screen-label="02 Form">
+    <div class="form-card">
+      <div class="eyebrow">Registration · Free</div>
+      <h1 class="form-title">Save your seat <em>at the table</em>.</h1>
+      <p class="form-lede">Leave your details to receive event updates, song lists, and an invitation to join our WhatsApp channel.</p>
+
+      <form id="reg-form" novalidate>
+        <div class="field" id="f-name">
+          <label for="i-name">Full name</label>
+          <input id="i-name" name="name" type="text" autocomplete="name" placeholder="First and last name" required />
+          <div class="field-error">Please enter your name.</div>
+        </div>
+
+        <div class="contact-tabs" role="tablist" aria-label="Contact method">
+          <button type="button" class="active" data-tab="phone" role="tab" aria-selected="true">Phone</button>
+          <button type="button" data-tab="email" role="tab" aria-selected="false">Email</button>
+        </div>
+
+        <div class="field" id="f-phone">
+          <label for="i-phone">Phone number (WhatsApp preferred)</label>
+          <input id="i-phone" name="phone" type="tel" autocomplete="tel" placeholder="+86 138 0000 0000" inputmode="tel" />
+          <div class="field-error">Please enter a valid phone number.</div>
+        </div>
+
+        <div class="field" id="f-email" style="display:none;">
+          <label for="i-email">Email address</label>
+          <input id="i-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" />
+          <div class="field-error">Please enter a valid email address.</div>
+        </div>
+
+        <button type="submit" class="submit" id="submit-btn">
+          <span>Register</span>
+        </button>
+
+        <p class="legal">
+          By registering, you agree to receive event-related messages. Your details are never shared.
+        </p>
+      </form>
+
+      <div class="form-foot">
+        © 2026 Upper Room · Hangzhou
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================== SUCCESS SCREEN ================== -->
+<div class="success" id="success-screen" role="dialog" aria-modal="true" aria-labelledby="success-title">
+  <div class="success-card">
+    <div class="success-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
+    <h2 id="success-title">Welcome<em>, <span id="success-name">friend</span>.</em></h2>
+    <div class="verse-q">&ldquo;Behold the greatness of God&rdquo; — Psalm 145:4-6</div>
+    <p class="lede">Your registration is confirmed for <strong>Living-Room Worship</strong>, July&nbsp;11,&nbsp;2026.<br/>Now join our WhatsApp channel so you don't miss anything:</p>
+
+    <div class="wa-card">
+      <div class="wa-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.5 2.1 7.9L.5 31.5l7.8-2c2.3 1.3 4.9 1.9 7.7 1.9 8.6 0 15.5-7 15.5-15.5S24.6.5 16 .5zm0 28.3c-2.5 0-4.9-.7-7-1.9l-.5-.3-4.6 1.2 1.2-4.5-.3-.5C3.6 20.7 2.8 18.4 2.8 16 2.8 8.7 8.7 2.8 16 2.8c3.5 0 6.8 1.4 9.3 3.9s3.9 5.8 3.9 9.3c0 7.3-5.9 13.2-13.2 13.2zm7.6-9.9c-.4-.2-2.4-1.2-2.8-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.7-.6-3.3-2-.7-.6-1.4-1.5-1.6-1.9-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.7.1-.3 0-.5-.1-.7-.1-.2-.9-2.2-1.2-3-.3-.7-.6-.6-.9-.6h-.7c-.3 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.2 0 1.9 1.4 3.7 1.5 3.9.2.2 2.7 4.2 6.6 5.9 2.3 1 3.3 1.1 4.4.9.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.7-.5z"/></svg>
+      </div>
+      <div class="wa-info">
+        <div class="t">WhatsApp Channel</div>
+        <div class="s">Living-Room Worship · Upper Room</div>
+      </div>
+    </div>
+
+    <a class="btn-wa" href="https://whatsapp.com/channel/0029Vb6wQhtCcW4xdlekeS3S" target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.5 2.1 7.9L.5 31.5l7.8-2c2.3 1.3 4.9 1.9 7.7 1.9 8.6 0 15.5-7 15.5-15.5S24.6.5 16 .5z"/></svg>
+      Join the channel
+    </a>
+
+    <button class="btn-ghost" id="success-close">Close</button>
+  </div>
+</div>
+
+<!-- ================== ADMIN PANEL (hidden — open via /#admin) ================== -->
+<div class="admin" id="admin" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+
+  <!-- Gate -->
+  <div class="gate" id="admin-gate">
+    <h3>Admin access</h3>
+    <p>Enter the access code to view registrations.</p>
+    <input id="gate-input" type="password" placeholder="Access code" autocomplete="off" />
+    <div class="err">Incorrect code.</div>
+    <button id="gate-submit">Enter</button>
+    <button class="gate-cancel" id="gate-close">Cancel</button>
+  </div>
+
+  <!-- Sheet (hidden until unlocked) -->
+  <div class="admin-sheet" id="admin-sheet" style="display:none;">
+    <div class="admin-head">
+      <h3 id="admin-title">Registrations <em>list</em></h3>
+      <div class="admin-tools">
+        <button id="export-csv">Export CSV</button>
+        <button id="copy-table">Copy</button>
+        <button id="print-list">Print</button>
+        <button id="clear-all" class="danger">Clear all</button>
+        <button id="close-admin">Close</button>
+      </div>
+    </div>
+
+    <div class="admin-stats" id="admin-stats">
+      <div class="stat"><div class="n" id="stat-total">0</div><div class="l">Registered</div></div>
+      <div class="stat"><div class="n" id="stat-phone">0</div><div class="l">By phone</div></div>
+      <div class="stat"><div class="n" id="stat-email">0</div><div class="l">By email</div></div>
+      <div class="stat"><div class="n" id="stat-today">0</div><div class="l">Today</div></div>
+    </div>
+
+    <div class="admin-search">
+      <input id="admin-search-input" type="search" placeholder="Search by name, phone, email…" />
+    </div>
+
+    <table class="reg-table" id="reg-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>Type</th>
+          <th>Registered at</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="reg-tbody"></tbody>
+    </table>
+
+    <div class="admin-foot">
+      <strong>Storage:</strong> <span id="storage-mode">Supabase (centralized)</span>.<br/>
+      Registrations are collected from any device. Access admin panel via <code>/#admin</code>.
+    </div>
+  </div>
+</div>
+
+<script>
+/* =================================================================
+   CONFIG — adjust to deploy
+   ================================================================= */
+const CONFIG = {
+  // Admin access code — change this before sharing the page.
+  adminCode: "Worship@2026##",
+
+  // Supabase project
+  supabaseUrl: "https://kauodthouehzwjljzfdq.supabase.co",
+  supabaseAnonKey: "eyJhbG...xIms",
+  supabaseServiceKey: "eyJhbG...9bFM",
+
+  // WhatsApp channel link shown after success.
+  whatsappUrl: "https://whatsapp.com/channel/0029Vb6wQhtCcW4xdlekeS3S",
+};
+
+/* =================================================================
+   Helpers / Supabase API
+   ================================================================= */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+
+async function supabaseFetch(path, options = {}) {
+  const url = CONFIG.supabaseUrl + path;
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      "apikey": options.serviceKey ? CONFIG.supabaseServiceKey : CONFIG.supabaseAnonKey,
+      "Authorization": `Bearer ${options.serviceKey ? CONFIG.supabaseServiceKey : CONFIG.supabaseAnonKey}`,
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Prefer": options.prefer || "",
+      ...(options.customHeaders || {})
+    }
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Supabase ${res.status}: ${body}`);
+  }
+  return options.raw ? res : res.json();
+}
+
+async function loadAll() {
+  try {
+    return await supabaseFetch("/rest/v1/registrations?select=*&order=created_at.desc", { serviceKey: true });
+  } catch {
+    return [];
+  }
+}
+
+async function deleteEntry(id) {
+  await supabaseFetch(`/rest/v1/registrations?id=eq.${id}`, {
+    method: "DELETE",
+    serviceKey: true,
+    raw: true
+  });
+}
+
+async function clearAll() {
+  // Fetch all IDs then delete them
+  const all = await loadAll();
+  for (const r of all) {
+    await deleteEntry(r.id);
+  }
+}
+
+/* =================================================================
+   Contact tabs
+   ================================================================= */
+let contactMode = "phone";
+$$(".contact-tabs button").forEach(b => {
+  b.addEventListener("click", () => {
+    $$(".contact-tabs button").forEach(x => {
+      x.classList.toggle("active", x === b);
+      x.setAttribute("aria-selected", x === b ? "true" : "false");
+    });
+    contactMode = b.dataset.tab;
+    $("#f-phone").style.display = contactMode === "phone" ? "block" : "none";
+    $("#f-email").style.display = contactMode === "email" ? "block" : "none";
+  });
+});
+
+/* =================================================================
+   Form submit
+   ================================================================= */
+$("#reg-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name  = $("#i-name").value.trim();
+  const phone = $("#i-phone").value.trim();
+  const email = $("#i-email").value.trim();
+
+  let valid = true;
+  const setInvalid = (sel, on) => $(sel).classList.toggle("invalid", on);
+
+  setInvalid("#f-name", false);
+  setInvalid("#f-phone", false);
+  setInvalid("#f-email", false);
+
+  if (!name) { setInvalid("#f-name", true); valid = false; }
+
+  if (contactMode === "phone") {
+    const digits = phone.replace(/[^\d]/g, "");
+    if (digits.length < 7) { setInvalid("#f-phone", true); valid = false; }
+  } else {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { setInvalid("#f-email", true); valid = false; }
+  }
+
+  if (!valid) return;
+
+  const entry = {
+    name,
+    contact_type: contactMode,
+    phone: contactMode === "phone" ? phone : "",
+    email: contactMode === "email" ? email : "",
+    event: "Living-Room Worship · 2026-07-11"
+  };
+
+  const btn = $("#submit-btn");
+  btn.disabled = true;
+  btn.querySelector("span").textContent = "Registering…";
+
+  // Save to Supabase
+  try {
+    await supabaseFetch("/rest/v1/registrations", {
+      method: "POST",
+      body: JSON.stringify(entry),
+      prefer: "return=minimal"
+    });
+  } catch (err) {
+    console.warn("Supabase insert failed:", err);
+  }
+
+  btn.disabled = false;
+  btn.querySelector("span").textContent = "Register";
+
+  $("#success-name").textContent = name.split(" ")[0] || "friend";
+  $("#success-screen").classList.add("on");
+  $("#reg-form").reset();
+});
+
+/* =================================================================
+   Success screen
+   ================================================================= */
+$("#success-close").addEventListener("click", () => {
+  $("#success-screen").classList.remove("on");
+});
+
+/* =================================================================
+   Admin gate + sheet — accessible ONLY via URL (#admin or ?admin=1)
+   ================================================================= */
+const adminEl = $("#admin");
+const gateEl  = $("#admin-gate");
+const sheetEl = $("#admin-sheet");
+
+function openAdmin() {
+  adminEl.classList.add("on");
+  if (sessionStorage.getItem("lrw.admin") === "1") {
+    unlockAdmin();
+  } else {
+    gateEl.style.display = "block";
+    sheetEl.style.display = "none";
+    setTimeout(() => $("#gate-input").focus(), 60);
+  }
+}
+function closeAdmin() {
+  adminEl.classList.remove("on");
+  // Clean URL so the panel doesn't auto-reopen on reload
+  if (location.hash === "#admin") history.replaceState(null, "", location.pathname + location.search);
+}
+function unlockAdmin() {
+  gateEl.style.display = "none";
+  sheetEl.style.display = "block";
+  sessionStorage.setItem("lrw.admin", "1");
+  renderRegs();
+}
+
+$("#close-admin").addEventListener("click", closeAdmin);
+$("#gate-close").addEventListener("click", closeAdmin);
+$("#gate-submit").addEventListener("click", tryUnlock);
+$("#gate-input").addEventListener("keydown", e => {
+  if (e.key === "Enter") tryUnlock();
+});
+
+function tryUnlock() {
+  const v = $("#gate-input").value.trim();
+  if (v === CONFIG.adminCode) {
+    gateEl.classList.remove("bad");
+    unlockAdmin();
+  } else {
+    gateEl.classList.add("bad");
+    $("#gate-input").select();
+  }
+}
+
+// Open admin if URL hash is #admin OR query string contains admin=1
+function checkAdminRoute() {
+  if (location.hash === "#admin" || location.search.includes("admin=1")) {
+    openAdmin();
+  }
+}
+checkAdminRoute();
+window.addEventListener("hashchange", checkAdminRoute);
+
+// Esc closes overlays
+window.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    if (adminEl.classList.contains("on")) closeAdmin();
+    if ($("#success-screen").classList.contains("on")) $("#success-screen").classList.remove("on");
+  }
+});
+
+/* =================================================================
+   Admin: render list
+   ================================================================= */
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
+}
+function isToday(iso) {
+  const d = new Date(iso);
+  const n = new Date();
+  return d.toDateString() === n.toDateString();
+}
+
+let searchQ = "";
+$("#admin-search-input").addEventListener("input", e => {
+  searchQ = e.target.value.toLowerCase().trim();
+  renderRegs();
+});
+
+async function renderRegs() {
+  const all = await loadAll();
+  $("#stat-total").textContent = all.length;
+  $("#stat-phone").textContent = all.filter(r => r.contact_type === "phone").length;
+  $("#stat-email").textContent = all.filter(r => r.contact_type === "email").length;
+  $("#stat-today").textContent = all.filter(r => isToday(r.created_at)).length;
+  $("#storage-mode").textContent = "Supabase (centralized)";
+
+  const filtered = searchQ
+    ? all.filter(r =>
+        (r.name||"").toLowerCase().includes(searchQ) ||
+        (r.phone||"").toLowerCase().includes(searchQ) ||
+        (r.email||"").toLowerCase().includes(searchQ))
+    : all;
+
+  const tbody = $("#reg-tbody");
+  if (!filtered.length) {
+    tbody.innerHTML = `<tr><td class="empty" colspan="6">${all.length ? "No registrations match your search." : "No registrations yet. New entries will appear here."}</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map((r, i) => `
+    <tr>
+      <td style="color:var(--ink-mute)">${i + 1}</td>
+      <td style="font-weight:500">${escapeHtml(r.name)}</td>
+      <td>${escapeHtml(r.phone || r.email || "")}</td>
+      <td style="font-family:'Inter',sans-serif; font-size:11px; letter-spacing:0.18em; color:var(--ink-mute); text-transform:uppercase; font-weight:600;">${r.contact_type}</td>
+      <td style="color:var(--ink-mute); font-size:13px;">${fmtDate(r.created_at)}</td>
+      <td style="text-align:right;"><button class="row-action" data-del="${r.id}" title="Delete">×</button></td>
+    </tr>
+  `).join("");
+
+  $$('[data-del]').forEach(btn => {
+    btn.addEventListener("click", async () => {
+      if (!confirm("Delete this registration?")) return;
+      await deleteEntry(btn.dataset.del);
+      renderRegs();
+    });
+  });
+}
+
+/* =================================================================
+   Admin: export / copy / print / clear
+   ================================================================= */
+$("#export-csv").addEventListener("click", async () => {
+  const all = await loadAll();
+  if (!all.length) { alert("No registrations to export."); return; }
+  const header = ["#","Name","Type","Phone","Email","Registered at","Event"];
+  const rows = all.map((r,i) => [
+    i+1, r.name, r.contact_type, r.phone, r.email, fmtDate(r.created_at), r.event
+  ]);
+  const csv = [header, ...rows].map(row =>
+    row.map(cell => {
+      const s = String(cell ?? "");
+      return /[",\n;]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+    }).join(",")
+  ).join("\n");
+  const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `living-room-worship-registrations-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+$("#copy-table").addEventListener("click", async () => {
+  const all = await loadAll();
+  if (!all.length) { alert("No registrations to copy."); return; }
+  const text = all.map((r,i) =>
+    `${i+1}\t${r.name}\t${r.contact_type === "phone" ? r.phone : r.email}\t${fmtDate(r.created_at)}`
+  ).join("\n");
+  try {
+    await navigator.clipboard.writeText(`Name\tContact\tRegistered at\n${text}`);
+    const b = $("#copy-table");
+    const orig = b.textContent;
+    b.textContent = "Copied ✓";
+    setTimeout(() => b.textContent = orig, 1500);
+  } catch {
+    alert("Could not copy to clipboard.");
+  }
+});
+
+$("#print-list").addEventListener("click", async () => {
+  const all = await loadAll();
+  if (!all.length) { alert("No registrations to print."); return; }
+  const w = window.open("", "_blank");
+  const rows = all.map((r,i) =>
+    `<tr><td>${i+1}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.phone || r.email)}</td><td>${fmtDate(r.created_at)}</td></tr>`
+  ).join("");
+  w.document.write(`<!doctype html><html><head><title>Living-Room Worship · Registrations</title>
+    <style>
+      body{font-family: system-ui, sans-serif; padding: 32px; color: #1f1608;}
+      h1{font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500;}
+      table{width: 100%; border-collapse: collapse; margin-top: 16px;}
+      th,td{padding: 8px 10px; border-bottom: 1px solid #ddd; text-align: left; font-size: 13px;}
+      th{background: #f5eddc; text-transform: uppercase; font-size: 11px; letter-spacing: 0.18em;}
+    </style></head><body>
+    <h1>Living-Room Worship — Registrations</h1>
+    <p>${all.length} registered · exported on ${new Date().toLocaleString("en-US")}</p>
+    <table><thead><tr><th>#</th><th>Name</th><th>Contact</th><th>Registered at</th></tr></thead>
+    <tbody>${rows}</tbody></table></body></html>`);
+  w.document.close();
+  setTimeout(() => w.print(), 300);
+});
+
+$("#clear-all").addEventListener("click", async () => {
+  if (!confirm("Delete all registrations? This cannot be undone.")) return;
+  if (!confirm("Are you absolutely sure? All data will be lost.")) return;
+  await clearAll();
+  renderRegs();
+});
+</script>
+</body>
+</html>
