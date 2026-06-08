@@ -1038,8 +1038,8 @@ const CONFIG = {
 
   // Supabase project
   supabaseUrl: "https://kauodthouehzwjljzfdq.supabase.co",
-  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthdW9kdGhvdWVoendqbGp6ZmRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4Nzk5OTQsImV4cCI6MjA5NjQ1NTk5NH0.2B21bKHgqsbiIBRBGS34YaJeDua34Xi8o1NeqIixIms",
-  supabaseServiceKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthdW9kdGhvdWVoendqbGp6ZmRxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDg3OTk5NCwiZXhwIjoyMDk2NDU1OTk0fQ.gGJwTFRtAe6_ztD4wsOln0NkZhlfPuMWySYOKhv9bFM",
+  supabaseAnonKey: "eyJhbG...xIms",
+  supabaseServiceKey: "eyJhbG...9bFM",
 
   // WhatsApp channel link shown after success.
   whatsappUrl: "https://whatsapp.com/channel/0029Vb6wQhtCcW4xdlekeS3S",
