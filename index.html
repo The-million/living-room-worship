@@ -1198,8 +1198,12 @@ const sheetEl = $("#admin-sheet");
 
 function openAdmin() {
   adminEl.classList.add("on");
-  if (sessionStorage.getItem("lrw.admin") === "1") {
-    unlockAdmin();
+  const savedPw = sessionStorage.getItem("lrw.adminPw");
+  if (sessionStorage.getItem("lrw.admin") === "1" && savedPw) {
+    adminPassword = savedPw;
+    gateEl.style.display = "none";
+    sheetEl.style.display = "block";
+    renderRegs();
   } else {
     gateEl.style.display = "block";
     sheetEl.style.display = "none";
@@ -1212,8 +1216,8 @@ function closeAdmin() {
   if (location.hash === "#admin") history.replaceState(null, "", location.pathname + location.search);
 }
 function unlockAdmin() {
-  // Store password from gate input for API calls
   adminPassword = $("#gate-input").value.trim();
+  sessionStorage.setItem("lrw.adminPw", adminPassword);
   gateEl.style.display = "none";
   sheetEl.style.display = "block";
   sessionStorage.setItem("lrw.admin", "1");
